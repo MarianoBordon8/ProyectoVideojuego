@@ -1,0 +1,37 @@
+# Archivos y carpetas generadas automáticamente por Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Archivos de usuario
+UserSettings/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+
+# VS Code
+.vscode/
+
+# Archivos de sistema
+.DS_Store
+*.apk
+*.aab
+*.unitypackage
+*.log
+
+# Sistema de versiones
+.idea/
