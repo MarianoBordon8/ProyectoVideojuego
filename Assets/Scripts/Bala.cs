@@ -5,21 +5,38 @@ using UnityEngine;
 public class Bala : MonoBehaviour
 {
     public int daño;
+    [HideInInspector] public GameObject origenDisparo;
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name != "Player")
+        if (origenDisparo == null)
         {
+            return;
+        }
 
+        if (collision.gameObject == origenDisparo)
+        {
+            return;
+        }
 
+        if (origenDisparo.CompareTag("Player"))
+        {
             VidaEnemigo enemigo = collision.gameObject.GetComponent<VidaEnemigo>();
-
             if (enemigo != null)
             {
                 enemigo.RecibirDaño(daño);
             }
-
-            Destroy(gameObject);
         }
+
+        if (origenDisparo.CompareTag("Enemy"))
+        {
+            VidaPersonaje jugador = collision.gameObject.GetComponent<VidaPersonaje>();
+            if (jugador != null)
+            {
+                jugador.RestarVida();
+            }
+        }
+
+        Destroy(gameObject);
     }
 }

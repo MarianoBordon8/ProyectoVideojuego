@@ -13,7 +13,7 @@ public class ChoqueEnemigos : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Alto" || collision.gameObject.name == "Pequeño" || collision.gameObject.name == "Ancho")
+        if (collision.gameObject.tag == "Enemy")
         {
             if (vidaPersonaje != null)
             {

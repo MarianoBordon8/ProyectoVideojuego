@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7927641317401812401}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Subida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 7927641317452014439}
   - component: {fileID: 7927641317452014438}
   - component: {fileID: 7927641317452014425}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Diagonal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cc10f25cf896ed24aad5dc38bfdafe39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 7927641318027259344}
   - component: {fileID: 7927641318027259347}
   - component: {fileID: 7927641318027259346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Diagonal1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cc10f25cf896ed24aad5dc38bfdafe39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 7927641318155919328}
   - component: {fileID: 7927641318155919331}
   - component: {fileID: 7927641318155919330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Techo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2badfabe1eeff714fa0504e8d2a63bdd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -373,7 +373,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: de475bf6503bc6c41a48741449e6c124, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 7927641318974517947}
   - component: {fileID: 7927641318974517946}
   - component: {fileID: 7927641318974517949}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Piso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2badfabe1eeff714fa0504e8d2a63bdd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

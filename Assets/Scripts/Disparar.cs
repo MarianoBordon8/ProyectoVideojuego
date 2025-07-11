@@ -8,24 +8,52 @@ public class Disparar : MonoBehaviour
     public float velocidadBala;
     public Transform puntoDisparo;
 
-
+    void Start()
+    {
+        if (gameObject.tag == "Enemy")
+        {
+            InvokeRepeating("DispararProyectil", 0, 2f);
+        }
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (gameObject.tag == "Player")
         {
-            Invoke("DispararProyectil", 0f);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Invoke("DispararProyectil", 0f);
+            }
         }
+        
+        
     }
 
     void DispararProyectil()
     {
+
         GameObject bala = Instantiate(prefabBala, puntoDisparo.position, Quaternion.identity);
+
+        Bala scriptBala = bala.GetComponent<Bala>();
+        if (scriptBala != null)
+        {
+            scriptBala.origenDisparo = this.gameObject;
+        }
+
+        Collider balaCol = bala.GetComponent<Collider>();
+        Collider emisorCol = GetComponent<Collider>();
+        if (balaCol != null && emisorCol != null)
+        {
+            Physics.IgnoreCollision(balaCol, emisorCol);
+        }
+
         Rigidbody rb = bala.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.velocity = puntoDisparo.forward * velocidadBala;
         }
-        Destroy(bala, 6f);
 
+        Destroy(bala, 6f);
     }
+
+    
 }

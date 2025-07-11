@@ -25,4 +25,3 @@ public class MovimientoCamara : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, rotacionY, rotacionX);
     }
 }
-
