@@ -33,7 +33,7 @@ public class Bala : MonoBehaviour
             VidaPersonaje jugador = collision.gameObject.GetComponent<VidaPersonaje>();
             if (jugador != null)
             {
-                jugador.RestarVida();
+                jugador.RecibirDaño(daño);
             }
         }
 

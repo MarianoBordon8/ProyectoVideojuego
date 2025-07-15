@@ -17,7 +17,7 @@ public class ChoqueEnemigos : MonoBehaviour
         {
             if (vidaPersonaje != null)
             {
-                vidaPersonaje.RestarVida();
+                vidaPersonaje.RecibirDaño(1); ;
             }
         }
     }

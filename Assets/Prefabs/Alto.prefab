@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c345c006342e92f4c9baad4d87ecd66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 1
+  vida: 2
 --- !u!114 &1838823914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b499e1c0804f5044fbafa764f4c6d100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBala: {fileID: 6975835605178978606, guid: 1a84d67888a2ead44b98757b718d1cea,
+  prefabBala: {fileID: 7119945009245879363, guid: b2043613bf857df49970f8c84d480d68,
     type: 3}
   velocidadBala: 3
   puntoDisparo: {fileID: 1403653542}

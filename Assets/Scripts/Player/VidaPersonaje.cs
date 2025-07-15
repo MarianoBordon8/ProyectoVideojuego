@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class VidaPersonaje : MonoBehaviour
 {
     public int vidas;
 
-    public void RestarVida()
+    public void RecibirDaño(int daño)
     {
-        vidas--;
+        vidas -= daño;
         print("te quedan " + vidas + " vidas");
 
-        if (vidas == 0)
+        if (vidas <= 0)
         {
-            Destroy(gameObject);
+            GameManager.instancia?.PerderJuego();
+            
         }
     }
+
+    
 }

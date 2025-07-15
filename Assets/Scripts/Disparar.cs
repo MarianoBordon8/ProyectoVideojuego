@@ -52,7 +52,7 @@ public class Disparar : MonoBehaviour
             rb.velocity = puntoDisparo.forward * velocidadBala;
         }
 
-        Destroy(bala, 6f);
+        Destroy(bala, 5f);
     }
 
     
