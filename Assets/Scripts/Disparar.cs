@@ -4,34 +4,66 @@ using UnityEngine;
 
 public class Disparar : MonoBehaviour
 {
-    public GameObject prefabBala;
+    public GameObject balaPrincipal;
+    public GameObject balaSecundaria;
     public float velocidadBala;
     public Transform puntoDisparo;
 
+    public int cargadorPrincipal = 10;
+    public int cargadorSecundario = 5;
+
+    private int balasRestantesPrincipal;
+    private int balasRestantesSecundario;
+
     void Start()
     {
+        balasRestantesPrincipal = cargadorPrincipal;
+        balasRestantesSecundario = cargadorSecundario;
+
         if (gameObject.tag == "Enemy")
         {
-            InvokeRepeating("DispararProyectil", 0, 2f);
+            InvokeRepeating("DispararProyectilPrincipal", 0, 2f);
         }
     }
+
     void Update()
     {
         if (gameObject.tag == "Player")
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0))
             {
-                Invoke("DispararProyectil", 0f);
+                if (balasRestantesPrincipal > 0)
+                {
+                    DispararProyectil(balaPrincipal);
+                    balasRestantesPrincipal--;
+                    Debug.Log("Bala principal restante: " + balasRestantesPrincipal);
+                }
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (balasRestantesSecundario > 0)
+                {
+                    DispararProyectil(balaSecundaria);
+                    balasRestantesSecundario--;
+                    Debug.Log("Bala secundaria restante: " + balasRestantesSecundario);
+                }
             }
         }
-        
-        
     }
 
-    void DispararProyectil()
+    void DispararProyectilPrincipal()
     {
+        if (balasRestantesPrincipal > 0)
+        {
+            DispararProyectil(balaPrincipal);
+            balasRestantesPrincipal--;
+        }
+    }
 
-        GameObject bala = Instantiate(prefabBala, puntoDisparo.position, Quaternion.identity);
+    void DispararProyectil(GameObject balaPrefab)
+    {
+        GameObject bala = Instantiate(balaPrefab, puntoDisparo.position, Quaternion.identity);
 
         Bala scriptBala = bala.GetComponent<Bala>();
         if (scriptBala != null)
@@ -54,6 +86,4 @@ public class Disparar : MonoBehaviour
 
         Destroy(bala, 5f);
     }
-
-    
 }

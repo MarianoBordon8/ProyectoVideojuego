@@ -168,7 +168,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b499e1c0804f5044fbafa764f4c6d100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBala: {fileID: 3897210127930742810, guid: 14f65ece852f12f4da2dde4406002980,
+  balaPrincipal: {fileID: 3897210127930742810, guid: 14f65ece852f12f4da2dde4406002980,
+    type: 3}
+  balaSecundaria: {fileID: 3897210127930742810, guid: 14f65ece852f12f4da2dde4406002980,
     type: 3}
   velocidadBala: 3
   puntoDisparo: {fileID: 962459379}
+  cargador: 5

@@ -29,13 +29,13 @@ public class EnemyManager : MonoBehaviour
     public void RegistrarEnemigo()
     {
         enemigosVivos++;
-        Debug.Log("Quedan: " + enemigosVivos + "Enemigos");
+        Debug.Log("Quedan: " + enemigosVivos + " Enemigos");
     }
 
     public void EliminarEnemigo()
     {
         enemigosVivos--;
-        Debug.Log("Quedan: " + enemigosVivos + "Enemigos");
+        Debug.Log("Quedan: " + enemigosVivos + " Enemigos");
 
         if (enemigosVivos <= 0 && !victoriaGenerada)
         {
@@ -51,7 +51,7 @@ public class EnemyManager : MonoBehaviour
         if (circuloVictoria != null)
         {
             Instantiate(circuloVictoria, posicionVictoria, Quaternion.identity);
-            Debug.Log("¡Victoria generada!");
+            Debug.Log("¡Victoria generada en la cima!");
         }
     }
 }
