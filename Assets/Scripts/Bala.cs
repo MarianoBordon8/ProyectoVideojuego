@@ -9,15 +9,11 @@ public class Bala : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (origenDisparo == null)
-        {
-            return;
-        }
+        if (origenDisparo == null) return;
 
-        if (collision.gameObject == origenDisparo)
-        {
-            return;
-        }
+        if (collision.gameObject == origenDisparo) return;
+
+        if (collision.CompareTag("Bala")) return;
 
         if (origenDisparo.CompareTag("Player"))
         {

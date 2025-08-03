@@ -8,7 +8,12 @@ public class Victoria : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instancia?.IntentarGanarJuego();
+            GameManager gm = FindObjectOfType<GameManager>();
+            if (gm != null)
+            {
+                gm.IntentarGanarJuego();
+            }
+
         }
     }
 }

@@ -21,6 +21,7 @@ public class ControladorBlancos : MonoBehaviour
 
     public void BlancoDestruido()
     {
+        
         blancosRestantes--;
 
         if (blancosRestantes <= 0 && pisoParaActivar != null)

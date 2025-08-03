@@ -14,8 +14,17 @@ public class VidaPersonaje : MonoBehaviour
 
         if (vidas <= 0)
         {
-            GameManager.instancia?.PerderJuego();
-            
+            GameManager gm = FindObjectOfType<GameManager>();
+            if (gm != null)
+            {
+                gm.PerderJuego();
+            }
+            else
+            {
+                Debug.LogWarning("GameManager no encontrado en la escena.");
+            }
+
+
         }
     }
 

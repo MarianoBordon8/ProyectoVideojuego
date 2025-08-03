@@ -12,6 +12,7 @@ public class Acido : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            
             vidaPersonaje = other.GetComponent<VidaPersonaje>();
 
             if (vidaPersonaje != null)

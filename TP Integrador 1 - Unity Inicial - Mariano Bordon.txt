@@ -1,0 +1,3 @@
+El juego se llama Escapa de la Torre, es un juego creado solo con objetos de unity por el momento, la forma de ganar es matando todos los enemigos y luego subiendo a la cima de la torre que te espera la victoria.
+Cada nivel es mas difícil que el anterior y se van agregando nuevas dificultades en cada piso de la torre, por ejemplo, laberintos con enemigos, charcos de lava, charcos de acido, etc. Se necesito pasar cada piso para llegar a la cima.
+El jugador de puede manejar tanto con las flecha como con wasd, la cámara se mueve con el mouse y los disparos con los clicks de mouse, tiene 2 balas con distintos daños y formas, esa es la idea del juego. 

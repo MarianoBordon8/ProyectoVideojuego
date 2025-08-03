@@ -1,67 +1,83 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static System.Net.Mime.MediaTypeNames;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instancia;
-
+    public int nivelActual;
+    public int nivelMaximo = 3;
     private bool juegoTerminado = false;
 
-    void Awake()
+    void Start()
     {
-        if (instancia == null)
-            instancia = this;
-        else
-            Destroy(gameObject);
+        string nombreEscena = SceneManager.GetActiveScene().name;
+        if (nombreEscena.StartsWith("Nivel"))
+        {
+            if (int.TryParse(nombreEscena.Replace("Nivel", ""), out int numeroNivel))
+            {
+                NivelManager.instancia?.EstablecerNivelActual(numeroNivel);
+            }
+        }
     }
+
 
     public void PerderJuego()
     {
         if (juegoTerminado) return;
-
         juegoTerminado = true;
-        Debug.Log("¡¡Perdiste!!");
-        Invoke("ReiniciarNivel", 0f);
+
+        SceneManager.LoadScene("PerderNivel");
     }
 
     public void IntentarGanarJuego()
     {
         if (juegoTerminado) return;
+        juegoTerminado = true;
 
-        if (EnemyManager.instancia.enemigosVivos == 0)
+        int nivelActual = NivelManager.instancia.ObtenerNivelActual();
+
+        if (nivelActual >= nivelMaximo)
         {
-            juegoTerminado = true;
-            Debug.Log("¡¡Ganaste!!");
-            Invoke("CargarSiguienteNivel", 0f);
-
+            SceneManager.LoadScene("GanarJuego");
         }
         else
         {
-            Debug.Log("¡No ganaste todavía! Aún quedan enemigos.");
+            SceneManager.LoadScene("GanarNivel");
         }
     }
 
-    void ReiniciarNivel()
+
+    public void SiguienteNivel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        NivelManager.instancia.AvanzarNivel();
+        int siguiente = NivelManager.instancia.ObtenerNivelActual();
+        SceneManager.LoadScene("Nivel" + siguiente);
+        juegoTerminado = false;
     }
 
-    void CargarSiguienteNivel()
-    {
-        int escenaActual = SceneManager.GetActiveScene().buildIndex;
-        int totalEscenas = SceneManager.sceneCountInBuildSettings;
 
-        if (escenaActual + 1 < totalEscenas)
-        {
-            SceneManager.LoadScene(escenaActual + 1);
-        }
-        else
-        {
-            Debug.Log("¡Ganaste el último nivel!");
-            SceneManager.LoadScene(0);
-        }
+    public void ReintentarNivel()
+    {
+        int nivelActual = NivelManager.instancia.ObtenerNivelActual();
+        SceneManager.LoadScene("Nivel" + nivelActual);
+        juegoTerminado = false;
+    }
+
+
+    public void IrAlMenu()
+    {
+        SceneManager.LoadScene("Menu");
+        juegoTerminado = false;
+    }
+
+    public void SalirDelJuego()
+    {
+        UnityEngine.Application.Quit();
+    }
+
+    public void IrATutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
     }
 }
-

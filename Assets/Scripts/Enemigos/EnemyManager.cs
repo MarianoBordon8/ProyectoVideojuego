@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class EnemyManager : MonoBehaviour
 {
-
-    public static EnemyManager instancia;
+    public static EnemyManager instancia; 
     public GameObject circuloVictoria;
     public Vector3 posicionVictoria = Vector3.zero;
-    private bool victoriaGenerada = false;
 
+    private bool victoriaGenerada = false;
     public int enemigosVivos = 0;
 
     void Awake()
     {
-
         if (instancia == null)
         {
             instancia = this;
@@ -39,19 +36,18 @@ public class EnemyManager : MonoBehaviour
 
         if (enemigosVivos <= 0 && !victoriaGenerada)
         {
+            victoriaGenerada = true;
             Debug.Log("¡Todos los enemigos han sido derrotados!");
-            GenerarVictoria();
-        }
-    }
 
-    void GenerarVictoria()
-    {
-        victoriaGenerada = true;
+            
+            if (circuloVictoria != null)
+            {
+                Instantiate(circuloVictoria, posicionVictoria, Quaternion.identity);
+                Debug.Log("¡Victoria generada en la cima!");
+            }
 
-        if (circuloVictoria != null)
-        {
-            Instantiate(circuloVictoria, posicionVictoria, Quaternion.identity);
-            Debug.Log("¡Victoria generada en la cima!");
+            
+            
         }
     }
 }

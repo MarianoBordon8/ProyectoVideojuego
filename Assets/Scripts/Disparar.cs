@@ -15,14 +15,21 @@ public class Disparar : MonoBehaviour
     private int balasRestantesPrincipal;
     private int balasRestantesSecundario;
 
+    private Animator animator;
+
+    
+    public float duracionAnimacionDisparo = 0.6f;
+
     void Start()
     {
         balasRestantesPrincipal = cargadorPrincipal;
         balasRestantesSecundario = cargadorSecundario;
 
+        animator = GetComponent<Animator>();
+
         if (gameObject.tag == "Enemy")
         {
-            InvokeRepeating("DispararProyectilPrincipal", 0, 2f);
+            InvokeRepeating("DispararProyectilPrincipal", 0, 3f);
         }
     }
 
@@ -37,6 +44,8 @@ public class Disparar : MonoBehaviour
                     DispararProyectil(balaPrincipal);
                     balasRestantesPrincipal--;
                     Debug.Log("Bala principal restante: " + balasRestantesPrincipal);
+
+                    ActivarAnimacionDisparo();
                 }
             }
 
@@ -47,8 +56,28 @@ public class Disparar : MonoBehaviour
                     DispararProyectil(balaSecundaria);
                     balasRestantesSecundario--;
                     Debug.Log("Bala secundaria restante: " + balasRestantesSecundario);
+
+                    ActivarAnimacionDisparo();
                 }
             }
+        }
+    }
+
+    void ActivarAnimacionDisparo()
+    {
+        if (animator != null)
+        {
+            animator.SetBool("Disparo", true);
+            StartCoroutine(DesactivarAnimacionDisparo());
+        }
+    }
+
+    IEnumerator DesactivarAnimacionDisparo()
+    {
+        yield return new WaitForSeconds(duracionAnimacionDisparo);
+        if (animator != null)
+        {
+            animator.SetBool("Disparo", false);
         }
     }
 
@@ -63,7 +92,7 @@ public class Disparar : MonoBehaviour
 
     void DispararProyectil(GameObject balaPrefab)
     {
-        GameObject bala = Instantiate(balaPrefab, puntoDisparo.position, Quaternion.identity);
+        GameObject bala = Instantiate(balaPrefab, puntoDisparo.position, puntoDisparo.rotation);
 
         Bala scriptBala = bala.GetComponent<Bala>();
         if (scriptBala != null)
