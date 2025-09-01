@@ -1,13 +1,26 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using static System.Net.Mime.MediaTypeNames;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instancia; // singleton
     public int nivelActual;
     public int nivelMaximo = 3;
     private bool juegoTerminado = false;
+
+    void Awake()
+    {
+        // Si no hay instancia, esta será la única
+        if (instancia == null)
+        {
+            instancia = this;
+            DontDestroyOnLoad(gameObject); // mantiene el GameManager entre escenas
+        }
+        else
+        {
+            Destroy(gameObject); // destruye duplicados
+        }
+    }
 
     void Start()
     {
@@ -21,12 +34,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     public void PerderJuego()
     {
         if (juegoTerminado) return;
         juegoTerminado = true;
-
         SceneManager.LoadScene("PerderNivel");
     }
 
@@ -47,7 +58,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     public void SiguienteNivel()
     {
         NivelManager.instancia.AvanzarNivel();
@@ -56,14 +66,12 @@ public class GameManager : MonoBehaviour
         juegoTerminado = false;
     }
 
-
     public void ReintentarNivel()
     {
         int nivelActual = NivelManager.instancia.ObtenerNivelActual();
         SceneManager.LoadScene("Nivel" + nivelActual);
         juegoTerminado = false;
     }
-
 
     public void IrAlMenu()
     {
@@ -73,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void SalirDelJuego()
     {
-        UnityEngine.Application.Quit();
+        Application.Quit();
     }
 
     public void IrATutorial()

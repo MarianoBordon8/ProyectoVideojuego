@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.WSA.Input;
 
 
 public class VidaPersonaje : MonoBehaviour
 {
     public int vidas;
+    public AudioClip sonidoDaño;
+    private AudioSource audioSource;
 
     public void RecibirDaño(int daño)
     {
+        audioSource.PlayOneShot(sonidoDaño);
         vidas -= daño;
         print("te quedan " + vidas + " vidas");
 
@@ -28,5 +32,11 @@ public class VidaPersonaje : MonoBehaviour
         }
     }
 
-    
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+
+
 }

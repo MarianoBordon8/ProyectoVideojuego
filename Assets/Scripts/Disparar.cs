@@ -17,8 +17,16 @@ public class Disparar : MonoBehaviour
 
     private Animator animator;
 
-    
     public float duracionAnimacionDisparo = 0.6f;
+
+    public float tiempoCooldown = 0.4f;
+    private float ultimoDisparo = -999f;
+
+    public AudioClip sonidoDisparoPrincipal;
+    public AudioClip sonidoDisparoSecundario;
+    public AudioClip sonidoDisparoEnemigo1;
+    public AudioClip sonidoDisparoEnemigo2;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -26,10 +34,11 @@ public class Disparar : MonoBehaviour
         balasRestantesSecundario = cargadorSecundario;
 
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         if (gameObject.tag == "Enemy")
         {
-            InvokeRepeating("DispararProyectilPrincipal", 0, 3f);
+            InvokeRepeating("DispararProyectilPrincipal", 0, 4f);
         }
     }
 
@@ -37,33 +46,42 @@ public class Disparar : MonoBehaviour
     {
         if (gameObject.tag == "Player")
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Time.time >= ultimoDisparo + tiempoCooldown)
             {
-                if (balasRestantesPrincipal > 0)
+                if (Input.GetMouseButtonDown(0) && balasRestantesPrincipal > 0)
                 {
                     DispararProyectil(balaPrincipal);
                     balasRestantesPrincipal--;
+                    ultimoDisparo = Time.time;
+
                     Debug.Log("Bala principal restante: " + balasRestantesPrincipal);
-
-                    ActivarAnimacionDisparo();
+                    ReproducirSonido(sonidoDisparoPrincipal);
+                    ActivarAnimacionDisparoPlayer();
                 }
-            }
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (balasRestantesSecundario > 0)
+                else if (Input.GetMouseButtonDown(1) && balasRestantesSecundario > 0)
                 {
                     DispararProyectil(balaSecundaria);
                     balasRestantesSecundario--;
-                    Debug.Log("Bala secundaria restante: " + balasRestantesSecundario);
+                    ultimoDisparo = Time.time;
 
-                    ActivarAnimacionDisparo();
+                    Debug.Log("Bala secundaria restante: " + balasRestantesSecundario);
+                    ReproducirSonido(sonidoDisparoSecundario);
+                    ActivarAnimacionDisparoPlayer();
                 }
             }
         }
     }
 
-    void ActivarAnimacionDisparo()
+    void ReproducirSonido(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
+    void ActivarAnimacionDisparoPlayer()
     {
         if (animator != null)
         {
@@ -83,12 +101,50 @@ public class Disparar : MonoBehaviour
 
     void DispararProyectilPrincipal()
     {
+        
         if (balasRestantesPrincipal > 0)
         {
-            DispararProyectil(balaPrincipal);
+            
+            GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+            if (jugador != null)
+            {
+                
+                float distancia = Vector3.Distance(transform.position, jugador.transform.position);
+                float distanciaMaximaSonido = 15f;
+
+                if (gameObject.tag == "Enemy")
+                {
+                    if (distancia <= distanciaMaximaSonido)
+                    {
+                        if (gameObject.name.Contains("Covid19"))
+                        {
+                            ReproducirSonido(sonidoDisparoEnemigo1);
+                        }
+                        else if (gameObject.name.Contains("Caballito"))
+                        {
+                            ReproducirSonido(sonidoDisparoEnemigo2);
+                        }
+                        DispararProyectil(balaPrincipal);
+                        ActivarAnimacionDisparoEnemigo();
+                    }
+                }
+                else
+                {
+                    DispararProyectil(balaPrincipal);
+                }
+            }
+            
             balasRestantesPrincipal--;
         }
     }
+    void ActivarAnimacionDisparoEnemigo()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Shoot");
+        }
+    }
+
 
     void DispararProyectil(GameObject balaPrefab)
     {

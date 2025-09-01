@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class MovimientoCamara : MonoBehaviour
 {
-    public float sensibilidad = 100f;
+    Transform camaraT;
 
-    private float rotacionX = 0f;
-    private float rotacionY = 0f;
+    float movX;
+    float movY;
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        camaraT = Camera.main.transform;
     }
 
     void Update()
     {
+        if (camaraT == null) Debug.Log("sssssssssssssssssssssssssssssss");
+        movX -= Input.GetAxis("Mouse Y");
+        movY += Input.GetAxis("Mouse X");
 
-        rotacionY += Input.GetAxis("Mouse X") * sensibilidad * Time.deltaTime;
-        rotacionX -= Input.GetAxis("Mouse Y") * sensibilidad * Time.deltaTime;
-        rotacionX = Mathf.Clamp(rotacionX, -80f, 80f);
+        movX = Mathf.Clamp(movX, -40, 30);
 
-        transform.rotation = Quaternion.Euler(0f, rotacionY, rotacionX);
+        camaraT.eulerAngles = new Vector3(movX, camaraT.eulerAngles.y, camaraT.eulerAngles.z);
+
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, movY, transform.eulerAngles.z);
     }
 }
